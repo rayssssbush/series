@@ -3,7 +3,26 @@ var router = express.Router()
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-	res.render('index', { title: 'Express' })
+	res.render('index', {
+		title: 'Serials',
+		carouselImages: [
+			{
+				src: 'images/squid.jpeg',
+				label: 'Squid Games',
+				desc: 'Южнокорейский сериал о смертельной игре на выживание.',
+			},
+			{
+				src: 'images/sherlock.jpeg',
+				label: 'Sherlock',
+				desc: 'Современная интерпретация приключений Шерлока Холмса.',
+			},
+			{
+				src: 'images/arcane.jpg',
+				label: 'Arcane',
+				desc: 'Анимационный сериал, основанный на игре League of Legends.',
+			},
+		],
+	})
 })
 router.get('/squid', function (req, res, next) {
 	res.render('serial', {
