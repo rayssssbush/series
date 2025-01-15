@@ -1,0 +1,5 @@
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://127.0.0.1:27017/testMongoose2024')
+const Serials = mongoose.model('Serial', { name: String })
+const serial = new Serials({ name: 'Squid Game' })
+serial.save().then(() => console.log('Piu'))
