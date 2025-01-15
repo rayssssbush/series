@@ -2,6 +2,8 @@ const { MongoClient } = require('mongodb')
 // or as an es module:
 // import { MongoClient } from 'mongodb'
 // Connection URL
+var data = require('./data.js').data
+console.log(data)
 const url = 'mongodb://localhost:27017'
 const client = new MongoClient(url)
 // Database Name
