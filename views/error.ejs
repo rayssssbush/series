@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title><%= message || 'Error' %></title>
-	</head>
-	<body>
-		<h1>Error: <%= message %></h1>
-		<p>Status: <%= error.status || 500 %></p>
-		<% if (error.stack) { %>
-		<pre><%= error.stack %></pre>
-		<% } %>
-	</body>
-</html>
+<% layout('./layout/page.ejs') %>
+<h1><%= message %></h1>
+<h2><%= error.status %></h2>
+<pre><%= error.stack %></pre>
