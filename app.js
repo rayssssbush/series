@@ -4,6 +4,7 @@ var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 var mongoose = require('mongoose')
+var session = require('express-session')
 mongoose.connect('mongodb://localhost/tc2024')
 
 var indexRouter = require('./routes/index')
@@ -31,7 +32,15 @@ app.use('/serials', serialsRouter)
 app.use(function (req, res, next) {
 	next(createError(404))
 })
-
+app.use(
+	session({
+		secret: 'Serials',
+		cookie: { maxAge: 60 * 1000 },
+		proxy: true,
+		resave: true,
+		saveUninitialized: true,
+	})
+)
 // error handler
 app.use(function (err, req, res, next) {
 	// set locals, only providing error in development
