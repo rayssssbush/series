@@ -1,10 +1,15 @@
-<% layout('../views/layout/page.ejs') %>
 <div class="container">
 	<h1>Регистрация и вход</h1>
 	<p>
 		Введите имя пользователя и пароль, если такого пользователя нет, то он будет
 		создан.
 	</p>
+
+	<!-- Отображение сообщения об ошибке -->
+	<% if (error) { %>
+	<div class="alert alert-danger"><%= error %></div>
+	<% } %>
+
 	<form class="form-horizontal" action="/logreg" method="post">
 		<div class="form-group">
 			<label class="control-label col-sm-1">Имя</label>
