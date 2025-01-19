@@ -18,7 +18,7 @@ var MongoStore = require('connect-mongo')
 // Настройка сессии с MongoDB
 app.use(
 	session({
-		secret: 'ThreeCats',
+		secret: 'Serials',
 		cookie: { maxAge: 60 * 1000 }, // Время жизни сессии 1 минута
 		proxy: true,
 		resave: true,
@@ -37,6 +37,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use(function (req, res, next) {
+	req.session.counter = req.session.counter + 1 || 1
+	next()
+})
+app.use(require('./middlewares/createMenu.js'))
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
