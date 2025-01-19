@@ -13,7 +13,21 @@ var serialsRouter = require('./routes/serials')
 
 var app = express()
 
-// view engine setup
+var MongoStore = require('connect-mongo')
+
+// Настройка сессии с MongoDB
+app.use(
+	session({
+		secret: 'ThreeCats',
+		cookie: { maxAge: 60 * 1000 }, // Время жизни сессии 1 минута
+		proxy: true,
+		resave: true,
+		saveUninitialized: true,
+		store: MongoStore.create({ mongoUrl: 'mongodb://localhost/tc2024' }), // Сохраняем сессию в MongoDB
+	})
+)
+
+// Настройки представлений (views)
 app.engine('ejs', require('ejs-locals'))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
@@ -32,15 +46,7 @@ app.use('/serials', serialsRouter)
 app.use(function (req, res, next) {
 	next(createError(404))
 })
-app.use(
-	session({
-		secret: 'Serials',
-		cookie: { maxAge: 60 * 1000 },
-		proxy: true,
-		resave: true,
-		saveUninitialized: true,
-	})
-)
+
 // error handler
 app.use(function (err, req, res, next) {
 	// set locals, only providing error in development
