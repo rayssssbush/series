@@ -1,4 +1,4 @@
-var data = [
+const data = [
 	{
 		title: 'Squid Games',
 		nick: 'squid',
@@ -30,5 +30,3 @@ var data = [
 		desc: 'История двух братьев, Сэма и Дина Винчестеров, которые охотятся на демонов, духов и других сверхъестественных существ.',
 	},
 ]
-
-module.exports.data = data
