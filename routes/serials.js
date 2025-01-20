@@ -1,12 +1,13 @@
 var express = require('express')
 var router = express.Router()
 var Serial = require('../models/serial').Serial // Импортируем модель Serial
+var checkAuth = require('../middlewares/checkAuth.js')
 
 router.get('/', function (req, res, next) {
 	res.send('Новый маршрутизатор, для маршрутов, начинающихся с serials')
 })
 
-router.get('/:nick', async function (req, res, next) {
+router.get('/:nick', checkAuth, async function (req, res, next) {
 	var serials = await Serial.find({ nick: req.params.nick })
 	console.log(serials)
 
