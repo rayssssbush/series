@@ -17,13 +17,11 @@ router.post('/logreg', async function (req, res, next) {
 	var password = req.body.password
 	var users = await User.find({ username: username })
 	if (!users.length) {
-		//res.send("<h1>Пользователь НЕ найден</h1>");
 		var user = new User({ username: username, password: password })
 		await user.save()
 		req.session.user_id = user._id
 		res.redirect('/')
 	} else {
-		//res.send("<h1>Пользователь найден</h1>");
 		var foundUser = users[0]
 		if (foundUser.checkPassword(password)) {
 			req.session.user_id = foundUser._id
